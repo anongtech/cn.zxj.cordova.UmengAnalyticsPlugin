@@ -12,6 +12,9 @@
     <keywords>umengAnalytics,umeng,analytics</keywords>
     <repo>https://github.com/zxj963577494/cn.zxj.cordova.UmengAnalyticsPlugin.git</repo>
     <issue>https://github.com/zxj963577494/cn.zxj.cordova.UmengAnalyticsPlugin/issues</issue>
+
+    <preference name="UMENG_APPKEY" />
+    <preference name="UMENG_CHANNEL"/>
     <engines>
         <engine name="cordova" version=">=3.0.0"/>
     </engines>
@@ -26,6 +29,14 @@
                 <param name="ios-package" value="UmengAnalyticsPlugin"/>
             </feature>
         </config-file>
+        <config-file target="*-Info.plist" parent="UMENGSETTINGS">
+            <dict>
+                <key>APPKEY</key>
+                <string>$UMENG_APPKEY</string>
+                <key>CHANNEL</key>
+                <string>$UMENG_CHANNEL</string>
+            </dict>
+        </config-file>
         <header-file src="src/ios/MobClick.h" target-dir="src/ios"/>
         <source-file src="src/ios/libMobClickLibrary.a" framework="true"/>
         <header-file src="src/ios/UmengAnalyticsPlugin.h" />
@@ -35,6 +46,10 @@
 
     <!-- android -->
     <platform name="android">
+        <hook type="after_plugin_add" src="scripts/android-install.js" />
+        <hook type="after_plugin_install" src="scripts/android-install.js" />
+        <hook type="before_plugin_rm" src="scripts/android-install.js" />
+        <hook type="before_plugin_uninstall" src="scripts/android-install.js" />
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="UmengAnalyticsPlugin">
                 <param name="android-package" value="cn.zxj.cordova.UmengAnalyticsPlugin"/>
@@ -47,12 +62,10 @@
             <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
         </config-file>
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <meta-data android:name="UMENG_CHANNEL" android:value="YOUR_CHANNEL"/>
-            <meta-data android:name="UMENG_APPKEY" android:value="YOUR_APP_KEY"/>
+            <meta-data android:name="UMENG_CHANNEL" android:value="$UMENG_CHANNEL"/>
+            <meta-data android:name="UMENG_APPKEY" android:value="$UMENG_APPKEY"/>
         </config-file>
         <source-file src="src/android/umeng-analytics-v5.5.2.jar" target-dir="libs"></source-file>
-        <source-file src="src/android/UmengAnalyticsPlugin.java"
-                     target-dir="src/cn/zxj/cordova/UmengAnalyticsPlugin/"></source-file>
     </platform>
 
     <!-- wp -->
