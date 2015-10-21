@@ -65,7 +65,7 @@
             <meta-data android:name="UMENG_CHANNEL" android:value="$UMENG_CHANNEL"/>
             <meta-data android:name="UMENG_APPKEY" android:value="$UMENG_APPKEY"/>
         </config-file>
-        <source-file src="src/android/umeng-analytics-v5.5.2.jar" target-dir="libs"></source-file>
+        <source-file src="src/android/umeng-analytics-v5.6.1.jar" target-dir="libs"></source-file>
     </platform>
 
     <!-- wp -->
